@@ -66,7 +66,11 @@ class TableToolbarSelect extends React.Component {
     const { classes, onRowsDelete, selectedRows, options, displayData, components = {} } = this.props;
     const textLabels = options.textLabels.selectedRows;
     const Tooltip = components.Tooltip || MuiTooltip;
-
+const deleteComponent =  <Tooltip title={textLabels.delete}>
+            <IconButton className={classes.iconButton} onClick={onRowsDelete} aria-label={textLabels.deleteAria}>
+              <DeleteIcon className={classes.deleteIcon} />
+            </IconButton>
+          </Tooltip>
     return (
       <Paper className={classes.root}>
         <div>
@@ -75,14 +79,8 @@ class TableToolbarSelect extends React.Component {
           </Typography>
         </div>
         {options.customToolbarSelect ? (
-          options.customToolbarSelect(selectedRows, displayData, this.handleCustomSelectedRows)
-        ) : (
-          <Tooltip title={textLabels.delete}>
-            <IconButton className={classes.iconButton} onClick={onRowsDelete} aria-label={textLabels.deleteAria}>
-              <DeleteIcon className={classes.deleteIcon} />
-            </IconButton>
-          </Tooltip>
-        )}
+          options.customToolbarSelect(selectedRows, displayData, this.handleCustomSelectedRows, deleteComponent)
+        ) : deleteComponent}
       </Paper>
     );
   }
