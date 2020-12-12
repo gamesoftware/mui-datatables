@@ -1929,6 +1929,7 @@ class MUIDataTable extends React.Component {
             displayData={displayData}
             selectRowUpdate={this.selectRowUpdate}
             components={this.props.components}
+            data={data}
           />
         )}
         {(selectedRows.data.length === 0 ||
